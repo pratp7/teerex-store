@@ -1,0 +1,26 @@
+.action-button{
+    background-color:rgb(240, 238, 236);
+    padding:0.5rem 0.8rem;
+    border-radius: 0.3rem;
+    transition: transform 0.2s;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    border: none    ;
+}
+
+
+.action-button:hover{
+    transform: scale(1.1);
+}
+
+
+.loader-style, .error-display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.error-display{
+    color: red;
+}

@@ -1,0 +1,63 @@
+.search-bar-layout{
+    margin: 2rem 0;
+    width: 30rem;
+}
+
+.genre-panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.product-lisitng{
+    display: flex;
+    padding: 2rem;
+}
+
+.show-Filter-button{
+    display: none;
+}
+
+.filter-section{
+    box-shadow: 4px 4px 7px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 20rem;
+    height: fit-content;
+    margin-right: 5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+
+.checkbox-area {
+   padding: 0.3rem;
+}
+
+.checkbox-area input {
+    margin-right: 0.5rem;
+}
+
+
+@media all and (max-width:1000px){
+
+    .product-lisitng{
+        flex-direction: column;
+    }
+    .filter-section{
+        flex-direction: row;
+        max-width:100%;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
+@media all and (max-width:600px){
+    .show-Filter-button{
+        display: block;
+    }
+}

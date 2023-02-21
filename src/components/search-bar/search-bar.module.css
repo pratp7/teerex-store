@@ -1,0 +1,14 @@
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.5rem;
+    padding: 1rem;
+}
+
+.search-bar{
+    width: 80%;
+    padding: 1rem;
+    border: none;
+    border-bottom: 1px solid black;
+}
