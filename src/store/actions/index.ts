@@ -21,8 +21,9 @@ export const fetchProducts = () => async(dispatch:Dispatch<Action>) => {
         //     localStorage.removeItem('products')
         // }, 1000000)
         
-        // using OR just in case .env does not works while evaluating
-        const listOfProducts = await axios.get(process.env.REACT_APP_FETCH_PRODUCTS_API as string || 'https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json')
+        // using api directly just in case .env does not works on evaluation
+        // const listOfProducts = await axios.get(process.env.REACT_APP_FETCH_PRODUCTS_API as string)
+        const listOfProducts = await axios.get('https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json')
         dispatch({
             type:ActionTypes.FETCH_PRODUCTS,
             payload:listOfProducts?.data
