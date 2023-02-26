@@ -5,14 +5,15 @@ import FilterSection from './filter-section'
 import classes from './index.module.css'
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import '../../utils/utilities.css'
-import { fetchProducts, matchingProductsWithSearchedData } from '../../store/actions'
+import { fetchProducts, matchingProductsWithSearchedData, setInputValue, isEmpty } from '../../store/actions'
 import { bindActionCreators } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { productsDataSelector, isLoadingSelector, isErrorSelector, filteredDataSelector } from '../../store/reducers/products'
+import { productsDataSelector, isLoadingSelector, isErrorSelector, filteredDataSelector, searchedInputSelector, filterObjectSelector } from '../../store/reducers/products'
 import Loader from '../../utils/Loader'
 import DisplayError from '../../utils/DisplayError'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -26,20 +27,21 @@ const ProductPage = () => {
     const isLoadingState = useSelector(isLoadingSelector)
     const isError = useSelector(isErrorSelector)
     const filteredData = useSelector(filteredDataSelector)
-
-    const [inputValue, setInputValue] = useState('')
+    const inputValue = useSelector(searchedInputSelector)
+    const selectedItems = useSelector(filterObjectSelector)
+    
     const [showFilterSection, setShowFilterSection] = useState(true)
-
+ 
     const searchBarHandler = (value:string) => {
         if(value === ''){
             fetchProductsFunc()
         }
-        setInputValue(value)
+        dispatch(setInputValue(value))
     }
 
     const searchProducts = (value:string) => {
         if(fetchedProducts && fetchedProducts.length && inputValue.length) {
-            searchedProductsFunc(value, setInputValue, toast)
+            searchedProductsFunc(value, toast)
         }
     }
 
@@ -48,9 +50,7 @@ const ProductPage = () => {
     }
 
     useEffect(()=> {
-        if(!filteredData.length) {
-            fetchProductsFunc() 
-        }
+        fetchProductsFunc() 
          
     },[])
 
@@ -70,7 +70,7 @@ const ProductPage = () => {
     }, [])
 
     if(isError) {
-        return <div> <DisplayError errorMessage={isError}/></div>  
+        return <DisplayError errorMessage={isError}/>
     }
 
   return (
@@ -97,7 +97,7 @@ const ProductPage = () => {
        </section>
        <div className={classes['product-lisitng']}>
         {showFilterSection && <FilterSection toast={toast} />}
-        <DisplayProducts productsList={!filteredData.length ? fetchedProducts:filteredData} toast={toast}/>
+        <DisplayProducts productsList={filteredData} toast={toast}/>
        </div>
     </div> }
     </>
