@@ -41,7 +41,7 @@ export const setInputValue = (value:string) => {
 // Display searched Data
 export const matchingProductsWithSearchedData = (value:string, toast:(value:string)=>any) => (dispatch:Dispatch<Action>, getState: () => any ) => {
     const valueChangedToLowercase = value.toLowerCase()
-    const fetchedProducts:fetchedProductsType[] = getState().productsReducer['filteredProducts']
+    const fetchedProducts:fetchedProductsType[] = getState().productsReducer['productsData']
     let filteredData:fetchedProductsType[] = checkSearchAndFilterData(fetchedProducts, getState().productsReducer['filterObject'], valueChangedToLowercase)
     if(!filteredData.length){
        toast('No Such Products Exist')
@@ -70,7 +70,7 @@ export const filterProductsWithCategories = (checkedItems:filterType, toast:(val
     })
 }
 // returns the list of searched and filtered products
-function checkSearchAndFilterData(data:fetchedProductsType[], checkedItems:filterType, inputValue:string,) {
+function checkSearchAndFilterData(data:fetchedProductsType[], checkedItems:filterType, inputValue:string) {
     return data.filter((product) => {
      if(inputValue && !product.name.toLowerCase().includes(inputValue) && !product.color.toLowerCase().includes(inputValue) && !product.type.toLowerCase().includes(inputValue) ) return false
      if(!isEmpty(checkedItems)){

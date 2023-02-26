@@ -8,7 +8,7 @@ import '../../utils/utilities.css'
 import { fetchProducts, matchingProductsWithSearchedData, setInputValue, isEmpty } from '../../store/actions'
 import { bindActionCreators } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
-import { productsDataSelector, isLoadingSelector, isErrorSelector, filteredDataSelector, searchedInputSelector, filterObjectSelector } from '../../store/reducers/products'
+import { productsDataSelector, isLoadingSelector, isErrorSelector, filteredDataSelector, searchedInputSelector } from '../../store/reducers/products'
 import Loader from '../../utils/Loader'
 import DisplayError from '../../utils/DisplayError'
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,13 +28,12 @@ const ProductPage = () => {
     const isError = useSelector(isErrorSelector)
     const filteredData = useSelector(filteredDataSelector)
     const inputValue = useSelector(searchedInputSelector)
-    const selectedItems = useSelector(filterObjectSelector)
     
     const [showFilterSection, setShowFilterSection] = useState(true)
  
     const searchBarHandler = (value:string) => {
         if(value === ''){
-            fetchProductsFunc()
+            searchedProductsFunc(value, toast)
         }
         dispatch(setInputValue(value))
     }
