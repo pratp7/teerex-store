@@ -22,8 +22,3 @@ export interface filterType {
 
 
 }
-
-export const colorArr = new Set<string>()
-export const genderArr = new Set<string>()
-export const priceArr = new Set<string>()
-export const typeArr = new Set<string>()

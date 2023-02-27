@@ -6,7 +6,8 @@ export enum ActionTypes {
     IS_ERROR='IS_ERROR',
     FILTERED_DATA='FILTERED_DATA',
     CART_DATA='CART_DATA',
-    CART_DATA_QUANTITY='CART_DATA_QUANTITY'
+    CART_DATA_QUANTITY='CART_DATA_QUANTITY',
+    UPDATE_INPUT_VALUE='UPDATE_INPUT_VALUE'
 }
 
 interface fetchFilterCartProducts {
@@ -27,6 +28,11 @@ interface cartQuantity {
     type:ActionTypes.CART_DATA_QUANTITY,
     payload:{productObj:fetchedProductsType, quantityAction:string}
 }
+ 
+interface updateSearchValue {
+    type:ActionTypes.UPDATE_INPUT_VALUE,
+    payload:string
+}
 
 
-export type Action = fetchFilterCartProducts | isLoading | isError | cartQuantity 
+export type Action = fetchFilterCartProducts | isLoading | isError | cartQuantity | updateSearchValue

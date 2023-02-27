@@ -7,9 +7,8 @@ type InitialState = {
     productsData: fetchedProductsType[],
     error:string,
     filteredProducts: fetchedProductsType[],
-    // searchFilteredProducts: fetchedProductsType[],
-    // searchedInput:string,
-    // filteredInput:filterType
+    searchedInput:string,
+    filterObject:filterType
 
 
 }
@@ -19,9 +18,8 @@ const initalState:InitialState = {
     productsData: [],
     error: '',
     filteredProducts:[],
-    // searchFilteredProducts:[],
-    // searchedInput:'',
-    // filteredInput:{color:new Set<string>, gender:new Set<string>, price:new Set<string>, type:new Set<string>}
+    searchedInput:'',
+    filterObject:{color:new Set<string>(), gender:new Set<string>(), price:new Set<string>(), type:new Set<string>()}
 }
 
 
@@ -33,7 +31,7 @@ const productsReducer = (state=initalState, action:Action) => {
             ...state,
             isLoading:false,
             productsData: action.payload,
-            filteredProducts:[]
+            filteredProducts:action.payload
          }
         case ActionTypes.IS_LOADING:
             return {
@@ -51,6 +49,11 @@ const productsReducer = (state=initalState, action:Action) => {
                 ...state,
                 filteredProducts: action.payload
                 }
+        case ActionTypes.UPDATE_INPUT_VALUE:
+            return {
+                ...state,
+                searchedInput: action.payload
+            }
         default:
             return state
     }
@@ -62,10 +65,10 @@ const productsReducer = (state=initalState, action:Action) => {
 
 export const productsDataSelector = (state:RootState) => state.productsReducer['productsData']
 export const filteredDataSelector = (state:RootState) => state.productsReducer['filteredProducts']
-// export const searchFilteredDataSelector = (state:RootState) => state.productsReducer['searchFilteredProducts']
 export const isLoadingSelector = (state:RootState) => state.productsReducer['isLoading']
 export const isErrorSelector = (state:RootState) => state.productsReducer['error']
-// export const searchedInputSelector = (state:RootState) => state.productsReducer['searchedInput']
+export const searchedInputSelector = (state:RootState) => state.productsReducer['searchedInput']
+export const filterObjectSelector = (state:RootState) => state.productsReducer['filterObject']
 
 
 export default productsReducer

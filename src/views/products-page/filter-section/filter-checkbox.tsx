@@ -4,26 +4,11 @@ import { filterType } from '../../../utils/datatypes'
 type Props = {
     filterType:string,
     checkboxes:Set<string>,
-    saveFilteredType:(value:string, type:string) => void,
+    saveFilteredType:(value:string) => void,
     selectedItems:filterType
 }
 const FilterCheckBox = ({filterType, checkboxes, saveFilteredType, selectedItems}:Props) => {
-    // const [checkboxSelected, setCheckBoxSelected] = useState(new Set<string>())
 
-    const handleOnChangeChecked = (value:string) => {
-
-      // setCheckBoxSelected((prevSet:Set<string>) => {
-      //   const newSet = new Set<string>(prevSet)
-      //   if(newSet.has(value)){
-      //       newSet.delete(value)
-      //   }else{
-      //       newSet.add(value)
-      //   }
-      //   return newSet
-      //  })
-       saveFilteredType(value, filterType)
-      
-    }
   return (
     <div>
         <h3>{filterType}</h3>
@@ -35,7 +20,7 @@ const FilterCheckBox = ({filterType, checkboxes, saveFilteredType, selectedItems
             name={checkboxData} 
             value={checkboxData}
             checked = {selectedItems[filterType.toLowerCase()]?.has(checkboxData)?true:false}
-            onChange ={() => handleOnChangeChecked(checkboxData)}
+            onChange ={() =>  saveFilteredType(checkboxData)}
             />
             <span>{checkboxData}</span>
         </div>
